@@ -8,7 +8,7 @@
 		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>me.learning</groupId>
+	<groupId>com.saumik</groupId>
 	<artifactId>task-management-system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>task-management-system</name>
