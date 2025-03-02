@@ -1,5 +1,6 @@
 package com.saumik.taskmanagement.exception;
 
+import com.saumik.taskmanagement.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -22,6 +23,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidTaskException.class)
     public ResponseEntity<Map<String, String>> handleInvalidTask(InvalidTaskException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DuplicateTaskTitleException.class)
+    public ResponseEntity<Map<String, String>> handleDuplicateTaskTitle(DuplicateTaskTitleException ex) {
         Map<String, String> response = new HashMap<>();
         response.put("error", ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -50,6 +58,12 @@ public class GlobalExceptionHandler {
             response.put("error", "Invalid value provided for TaskStatus");
         }
 
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidTaskParameterException.class)
+    public ResponseEntity<ApiResponse> handleInvalidParameterException(InvalidTaskParameterException ex) {
+        ApiResponse response = new ApiResponse(false, ex.getMessage(),null,null,HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
